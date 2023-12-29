@@ -1,0 +1,21 @@
+NodeJs
+
+npm init -y
+pip install httpie
+node --watch src/server.js
+http:localhost:3333
+
+
+{
+  "name": "ignite-nodejs-01-fundamentos-nodejs-challenge",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
