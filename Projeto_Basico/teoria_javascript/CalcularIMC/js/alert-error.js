@@ -8,4 +8,6 @@ export const AlertError = {
   close() {
     AlertError.message.classList.remove("open");
   },
+
+  
 };
