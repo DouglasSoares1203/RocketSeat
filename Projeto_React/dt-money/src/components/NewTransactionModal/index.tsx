@@ -1,4 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as Dialog from "@radix-ui/react-dialog";
+import { ArrowCircleDown, ArrowCircleUp, X } from "phosphor-react";
+import { Controller, useForm } from "react-hook-form";
+import { useContextSelector } from "use-context-selector";
+import * as z from "zod";
+import { TransactionsContext } from "../../contexts/TransactionsContext";
+
 import {
   CloseButton,
   Content,
@@ -6,12 +13,6 @@ import {
   TransactionType,
   TransactionTypeButton,
 } from "./styles";
-import { ArrowCircleDown, ArrowCircleUp, X } from "phosphor-react";
-import { Controller, useForm } from "react-hook-form";
-import * as z from "zod";
-import { useContextSelector } from "use-context-selector";
-import { TransactionsContext } from "../../contexts/TransactionsContext";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const newTransactionFormSchema = z.object({
   description: z.string(),
@@ -45,12 +46,14 @@ export function NewTransactionModal() {
 
   async function handleCreateNewTransaction(data: NewTransactionFormInputs) {
     const { description, price, category, type } = data;
+
     await createTransaction({
       description,
       price,
       category,
       type,
     });
+
     reset();
   }
 
@@ -98,7 +101,6 @@ export function NewTransactionModal() {
                     <ArrowCircleUp size={24} />
                     Entrada
                   </TransactionTypeButton>
-
                   <TransactionTypeButton variant="outcome" value="outcome">
                     <ArrowCircleDown size={24} />
                     Saída
