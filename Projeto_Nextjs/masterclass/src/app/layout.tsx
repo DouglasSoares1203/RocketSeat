@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Sidebar } from "@/components/Sidebar";
+import { HeroPattern } from "@/components/HeroPattern";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Sidebar />
         <div className=" ml-80 relative h-screen">
           <Header />
+          <HeroPattern />
           <div className=" py-24 max-w-4xl px-8 mx-auto">{children}</div>
         </div>
       </body>
