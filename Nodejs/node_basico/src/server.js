@@ -1,11 +1,14 @@
 require("express-async-errors");
-
+// const database = require("./database/sqlite");
+const migrationsRun = require("./database/sqlite/migrations");
 const AppError = require("./utils/AppError");
 
 const express = require("express");
 // const {usersRoutes} = require("./routes/user.routes");
 
 const routes = require("./routes"); //código enxuto e limpo e por padrão carrega o arquivo invex.js
+
+migrationsRun();
 
 const app = express(); // chamar express
 app.use(express.json()); // chama o json para testar no app de testes(ex:Insomnia)
