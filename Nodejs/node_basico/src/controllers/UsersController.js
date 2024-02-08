@@ -1,3 +1,4 @@
+const { hash } = require("bcryptjs"); // chamando a criptografia e o hash é o que vai chamar a função
 const AppError = require("../utils/AppError");
 const sqliteConnection = require("../database/sqlite");
 const { response } = require("express");
@@ -21,7 +22,15 @@ class UsersController {
     if (checkUserExists) {
       throw new AppError("Este e-mail já esta em uso."); //Significa que este email vai retornar essa mensagem se houver um email existe, caso contrario ele será criado
     }
-    return response.status(201).json;
+
+    const hashedPassword = await hash(password, 8); // Uma promisse trabalha por debaixo dos panos criando uma criptografia apenas usando o await ele aplica essa ação
+
+    await database.run(
+      "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
+      [name, email, hashedPassword]
+    );
+
+    return res.status(201).json();
     // const { page, limit } = req.query;
 
     // res.send(`Pagina: ${page}. Mostrar o limite: ${limit} `)
